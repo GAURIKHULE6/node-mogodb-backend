@@ -3,11 +3,13 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const User = require('./models/User');
+const productRoutes = require('./routes/productRoutes');
 
 // Create server & configure
 const server = express();
 server.use(cors());
 server.use(bodyParser.json());
+server.use('/product',productRoutes);
 
 //connesct atalast
 
@@ -38,7 +40,6 @@ server.post('/register',async(req,res)=>{
             status:false,
             message:`Error${err}`   
         })
-
     }
 })
 
