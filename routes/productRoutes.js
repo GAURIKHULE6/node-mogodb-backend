@@ -43,4 +43,39 @@ router.get('/get',async(req,res)=>{
     }
 })
 
+router.delete('/delete/:id',async(req,res)=>{
+    //findByIdAndDelete
+    try{
+        const id=req.params.id
+        await Product.findByIdAndDelete(id)
+        res.json({
+            status:true,
+            message:'Product deleted Succefully'
+        })
+    }catch (err){
+        res.json({
+            status:false,
+            message:`Error${err}`   
+        })
+    }
+})
+
+router.put('/update/:id',async(req,res)=>{
+    //findByIdAndUpdate
+    try{
+        const id=req.params.id
+        const update=await Product.findByIdAndUpdate(id,req.body,{new:true})
+        res.json({
+            status:true,
+            message:'Product Updated Succefully'
+        })
+
+    }catch (err){
+        res.json({
+            status:false,
+            message:`Error${err}`   
+        })
+    }
+
+})
 module.exports=router
